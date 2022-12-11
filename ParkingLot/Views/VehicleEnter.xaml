@@ -1,0 +1,189 @@
+﻿<Page x:Class="ParkingLot.Views.VehicleEnter"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="VehicleEnter"
+      Loaded="Page_Loaded">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Vertical"
+                    Grid.Row="1"
+                    Panel.ZIndex="2"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Right"
+                    Margin="0,0,20,20">
+
+            <Button x:Name="UpdateButton"
+                    ToolTip="Изменить"
+                    Grid.Row="1"
+                    Height="40"
+                    Width="40"
+                    Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
+                    materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                    BorderThickness="0"
+                    BorderBrush="Transparent"
+                    Click="UpdateButton_Click" 
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Margin="0,0,0,5">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF0AA5D6" Offset="0"/>
+                        <GradientStop Color="#FF113743" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.Content>
+                    <TextBlock>
+                        <materialDesign:PackIcon Kind="PencilOutline" 
+                                                 Foreground="White"
+                                                 Height="30"
+                                                 Width="30"/>
+                    </TextBlock>
+                </Button.Content>
+            </Button>
+
+            <Button x:Name="AddVehicleButton"
+                    ToolTip="Добавить"
+                    Grid.Row="1"
+                    Height="40"
+                    Width="40"
+                    Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
+                    materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                    BorderBrush="Transparent" 
+                    Click="AddVehicleButton_Click" 
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFD80A24"/>
+                        <GradientStop Color="#FF3E0F15" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.Content>
+                    <TextBlock>
+                    <materialDesign:PackIcon Kind="Plus" 
+                                             Foreground="White"
+                                             Height="30"
+                                             Width="30"/>
+                    </TextBlock>
+                </Button.Content>
+            </Button>
+        </StackPanel>
+
+        <materialDesign:Card>
+            <Grid>
+                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Left">
+                    <TextBlock Text="Фильтр: "
+                               FontFamily="Century Gothic"
+                               VerticalAlignment="Center"
+                               FontSize="18"
+                               Margin="8,0,0,0"/>
+                    <TextBox materialDesign:HintAssist.Hint="ФИО водителя"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             VerticalAlignment="Center"
+                             Margin="5,0,5,0"
+                             x:Name="DriverNameBox"
+                             Width="200"/>
+                    <TextBox materialDesign:HintAssist.Hint="Номера"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             VerticalAlignment="Center"
+                             Margin="5,0"
+                             x:Name="PlateNumberBox"
+                             Width="100"/>
+                    <ComboBox x:Name="VehicleTypeComboBox"
+                              Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                              VerticalAlignment="Center"
+                              Margin="0,0,0,3">
+                        <materialDesign:HintAssist.Hint>
+                            <TextBlock Text="Тип ТС" FontSize="14"/>
+                        </materialDesign:HintAssist.Hint>
+                        <ComboBoxItem Content="Легковой"/>
+                        <ComboBoxItem Content="Грузовой"/>
+                        <ComboBoxItem Content="Автобус"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center">
+                    <Button Content="Сбросить"
+                            x:Name="ResetSearchButton"
+                            Click="ResetSearchButton_Click"
+                            FontFamily="Century Gothic" 
+                            Foreground="#FFC5001A">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FFE4E3DB"/>
+                                <GradientStop Color="#FFC5BEBA" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+
+                    <Button Content="Поиск"
+                            x:Name="SearchButton"
+                            Click="SearchButton_Click"
+                            Margin="10,0" FontFamily="Century Gothic"
+                            Foreground="#FF113743">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FFE4E3DB"/>
+                                <GradientStop Color="#FFC5BEBA" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </materialDesign:Card>
+
+        <ScrollViewer Grid.Row="1"
+                      materialDesign:ScrollViewerAssist.IsAutoHideEnabled="True"
+                      materialDesign:ScrollViewerAssist.ShowSeparators="False"
+                      materialDesign:ScrollViewerAssist.CornerRectangleVisibility="Hidden"
+                      VerticalScrollBarVisibility="Auto"
+                      x:Name="VehiclesScrollViewer"
+                      PreviewMouseWheel="VehiclesScrollViewer_PreviewMouseWheel">
+
+            <ListBox Grid.Column="0" 
+                     ItemsSource="{Binding Path=Vehicles}"
+                     x:Name="VehiclesList">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Width="783">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Margin="5">
+                                <TextBlock FontSize="18" Text="{Binding Path=DriverFullName}" 
+                                           FontFamily="Century Gothic"
+                                           x:Name="DriverNameBox"/>
+                                <TextBlock Text="{Binding Path=Type}"
+                                           FontFamily="Century Gothic"
+                                           x:Name="VehicleTypeBlock"/>
+                                <TextBlock Text="{Binding Path=PlateNumber}"
+                                           FontFamily="Century Gothic"
+                                           x:Name="PlateNumberBox"/>
+                                <TextBlock Text="{Binding Path=ParkingTime}"
+                                           FontFamily="Century Gothic"
+                                           x:Name="ParkingTimeBox"/>
+                            </StackPanel>
+
+                            <Separator Grid.Row="1"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </ScrollViewer>
+    </Grid>
+</Page>
